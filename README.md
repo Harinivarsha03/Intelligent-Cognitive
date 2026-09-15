@@ -1,8 +1,8 @@
-# 🧠 Intelligent Cognitive and Interaction Assistant System
+#  Intelligent Cognitive and Interaction Assistant System
 
 An AI-powered intelligent assistant that understands natural language, detects user intent, uses external tools when required, maintains conversation context, and generates responses using a locally running Large Language Model.
 
-## 🚀 Project Overview
+##  Project Overview
 
 The Intelligent Cognitive and Interaction Assistant System is designed to demonstrate an **AI Agentic Workflow**.
 
@@ -15,7 +15,7 @@ For example:
 - Mathematical calculations → Calculator
 - Follow-up questions → Conversation Memory
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ```text
                     👤 User
@@ -42,7 +42,7 @@ For example:
                       │
                       ▼
                 💬 Final Response
-**🛠️ Technologies Used**
+**** Technologies Used**
 Python	Core programming language
 Llama 3.2	Local Large Language Model
 Ollama	Local LLM runtime
@@ -75,7 +75,7 @@ Intelligent-Cognitive-system/
 ├── requirements.txt
 └── test_llm.py
 
-****⚙️ How to Run****
+**** How to Run****
 1. Clone the repository
 git clone https://github.com/Harinivarsha03/Intelligent-Cognitive.git
 cd Intelligent-Cognitive
@@ -113,7 +113,7 @@ What is machine learning?
 Then:
 Why is it important?
 
-****🔄 Agentic Workflow****
+**** Agentic Workflow****
 User Request
      ↓
 Intent Detection
