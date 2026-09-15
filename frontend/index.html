@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cognitive AI Assistant</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #1e293b,
+                    #020617 45%,
+                    #000000
+                );
+
+            color: #f8fafc;
+
+            display: flex;
+
+        }
+
+
+        /* =========================================
+           MAIN APP
+        ========================================= */
+
+        .app {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            display: flex;
+
+        }
+
+
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+
+        .sidebar {
+
+            width: 270px;
+
+            background: rgba(15, 23, 42, 0.92);
+
+            border-right:
+                1px solid rgba(255,255,255,0.08);
+
+            padding: 25px 18px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            backdrop-filter: blur(20px);
+
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .logo-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            box-shadow:
+                0 8px 25px rgba(99,102,241,0.35);
+
+        }
+
+
+        .logo-text h2 {
+
+            font-size: 16px;
+
+        }
+
+
+        .logo-text span {
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+        }
+
+
+        .new-chat {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid
+                rgba(255,255,255,0.1);
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .new-chat:hover {
+
+            background:
+                rgba(255,255,255,0.1);
+
+        }
+
+
+        .menu-title {
+
+            margin-top: 35px;
+
+            margin-bottom: 12px;
+
+            font-size: 11px;
+
+            color: #64748b;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .feature:hover {
+
+            background:
+                rgba(255,255,255,0.05);
+
+        }
+
+
+        .feature-icon {
+
+            font-size: 18px;
+
+        }
+
+
+        .system-status {
+
+            margin-top: auto;
+
+            padding: 15px;
+
+            background:
+                rgba(34,197,94,0.07);
+
+            border:
+                1px solid rgba(34,197,94,0.15);
+
+            border-radius: 12px;
+
+        }
+
+
+        .status-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 12px;
+
+        }
+
+
+        .status-dot {
+
+            width: 8px;
+
+            height: 8px;
+
+            background: #22c55e;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 10px #22c55e;
+
+        }
+
+
+        .status-text {
+
+            color: #86efac;
+
+        }
+
+
+        .model-name {
+
+            color: #64748b;
+
+            font-size: 10px;
+
+            margin-top: 7px;
+
+        }
+
+
+        /* =========================================
+           CHAT SECTION
+        ========================================= */
+
+        .chat-section {
+
+            flex: 1;
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-width: 0;
+
+        }
+
+
+        /* HEADER */
+
+        .topbar {
+
+            height: 75px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.07);
+
+            background:
+                rgba(2,6,23,0.65);
+
+            backdrop-filter: blur(15px);
+
+        }
+
+
+        .top-title h1 {
+
+            font-size: 17px;
+
+            font-weight: 600;
+
+        }
+
+
+        .top-title p {
+
+            font-size: 11px;
+
+            color: #64748b;
+
+            margin-top: 3px;
+
+        }
+
+
+        .engine {
+
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(99,102,241,0.1);
+
+            border:
+                1px solid rgba(99,102,241,0.25);
+
+            color: #a5b4fc;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================
+           WELCOME SCREEN
+        ========================================= */
+
+        .chat-box {
+
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 35px;
+
+        }
+
+
+        .welcome {
+
+            max-width: 760px;
+
+            margin: 30px auto 40px;
+
+            text-align: center;
+
+        }
+
+
+        .welcome-icon {
+
+            width: 75px;
+
+            height: 75px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 22px;
+
+            font-size: 38px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            box-shadow:
+                0 15px 45px
+                rgba(99,102,241,0.3);
+
+        }
+
+
+        .welcome h1 {
+
+            margin-top: 22px;
+
+            font-size: 31px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #a5b4fc
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+        }
+
+
+        .welcome p {
+
+            margin-top: 10px;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =========================================
+           QUICK ACTIONS
+        ========================================= */
+
+        .quick-actions {
+
+            max-width: 760px;
+
+            margin: 0 auto 30px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+        }
+
+
+        .quick-card {
+
+            padding: 17px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+
+        .quick-card:hover {
+
+            transform: translateY(-3px);
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border-color:
+                rgba(99,102,241,0.4);
+
+        }
+
+
+        .quick-card .icon {
+
+            font-size: 21px;
+
+        }
+
+
+        .quick-card h3 {
+
+            font-size: 13px;
+
+            margin-top: 10px;
+
+        }
+
+
+        .quick-card p {
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =========================================
+           MESSAGES
+        ========================================= */
+
+        .message-wrapper {
+
+            max-width: 800px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+
+            gap: 12px;
+
+        }
+
+
+        .message-wrapper.user {
+
+            justify-content: flex-end;
+
+        }
+
+
+        .avatar {
+
+            min-width: 34px;
+
+            height: 34px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 16px;
+
+        }
+
+
+        .ai-avatar {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+        }
+
+
+        .user-avatar {
+
+            background: #334155;
+
+        }
+
+
+        .bubble {
+
+            max-width: 70%;
+
+            padding: 14px 17px;
+
+            border-radius: 15px;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+
+        }
+
+
+        .ai-bubble {
+
+            background:
+                rgba(30,41,59,0.85);
+
+            border:
+                1px solid rgba(255,255,255,0.07);
+
+            border-top-left-radius: 4px;
+
+        }
+
+
+        .user-bubble {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #6366f1
+                );
+
+            border-top-right-radius: 4px;
+
+        }
+
+
+        .intent {
+
+            display: inline-block;
+
+            margin-top: 9px;
+
+            padding: 4px 8px;
+
+            border-radius: 5px;
+
+            font-size: 9px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            color: #a5b4fc;
+
+            letter-spacing: .5px;
+
+        }
+
+
+        /* =========================================
+           TYPING
+        ========================================= */
+
+        .typing {
+
+            display: flex;
+
+            gap: 5px;
+
+            padding: 5px;
+
+        }
+
+
+        .typing span {
+
+            width: 6px;
+
+            height: 6px;
+
+            background: #94a3b8;
+
+            border-radius: 50%;
+
+            animation:
+                typing 1.2s infinite;
+
+        }
+
+
+        .typing span:nth-child(2) {
+
+            animation-delay: .15s;
+
+        }
+
+
+        .typing span:nth-child(3) {
+
+            animation-delay: .3s;
+
+        }
+
+
+        @keyframes typing {
+
+            0%, 60%, 100% {
+
+                transform: translateY(0);
+
+                opacity: .4;
+
+            }
+
+            30% {
+
+                transform: translateY(-5px);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        /* =========================================
+           INPUT
+        ========================================= */
+
+        .input-area {
+
+            padding: 20px 30px 25px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    rgba(2,6,23,.9)
+                );
+
+        }
+
+
+        .input-container {
+
+            max-width: 800px;
+
+            margin: auto;
+
+            position: relative;
+
+        }
+
+
+        #messageInput {
+
+            width: 100%;
+
+            min-height: 55px;
+
+            resize: none;
+
+            padding:
+                17px 65px 17px 18px;
+
+            border-radius: 15px;
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            background:
+                rgba(15,23,42,.9);
+
+            color: white;
+
+            outline: none;
+
+            font-size: 14px;
+
+        }
+
+
+        #messageInput:focus {
+
+            border-color:
+                rgba(99,102,241,.7);
+
+            box-shadow:
+                0 0 25px
+                rgba(99,102,241,.08);
+
+        }
+
+
+        #messageInput::placeholder {
+
+            color: #64748b;
+
+        }
+
+
+        #sendButton {
+
+            position: absolute;
+
+            right: 9px;
+
+            top: 9px;
+
+            width: 38px;
+
+            height: 38px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6366f1,
+                    #8b5cf6
+                );
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+        }
+
+
+        #sendButton:hover {
+
+            transform: scale(1.05);
+
+        }
+
+
+        #sendButton:disabled {
+
+            opacity: .4;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .input-info {
+
+            max-width: 800px;
+
+            margin: 8px auto 0;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            color: #475569;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media(max-width: 800px) {
+
+            .sidebar {
+
+                display: none;
+
+            }
+
+            .topbar {
+
+                padding: 0 18px;
+
+            }
+
+            .chat-box {
+
+                padding: 20px 15px;
+
+            }
+
+            .welcome h1 {
+
+                font-size: 24px;
+
+            }
+
+            .quick-actions {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .bubble {
+
+                max-width: 82%;
+
+            }
+
+            .input-area {
+
+                padding: 15px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🧠
+            </div>
+
+            <div class="logo-text">
+
+                <h2>Cognitive AI</h2>
+
+                <span>Intelligent Assistant</span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="new-chat"
+            onclick="clearChat()">
+
+            ＋ New Conversation
+
+        </button>
+
+
+        <div class="menu-title">
+            Capabilities
+        </div>
+
+
+        <div class="feature">
+
+            <span class="feature-icon">💬</span>
+
+            <span>Natural Language</span>
+
+        </div>
+
+
+        <div class="feature">
+
+            <span class="feature-icon">🧮</span>
+
+            <span>Smart Calculator</span>
+
+        </div>
+
+
+        <div class="feature">
+
+            <span class="feature-icon">🌤️</span>
+
+            <span>Weather Intelligence</span>
+
+        </div>
+
+
+        <div class="feature">
+
+            <span class="feature-icon">🧠</span>
+
+            <span>Conversation Memory</span>
+
+        </div>
+
+
+        <div class="menu-title">
+            System
+        </div>
+
+
+        <div class="feature">
+
+            <span class="feature-icon">⚡</span>
+
+            <span>Agentic Workflow</span>
+
+        </div>
+
+
+        <div class="feature">
+
+            <span class="feature-icon">🔒</span>
+
+            <span>Local AI Processing</span>
+
+        </div>
+
+
+        <div class="system-status">
+
+            <div class="status-row">
+
+                <span class="status-dot"></span>
+
+                <span class="status-text">
+                    System Online
+                </span>
+
+            </div>
+
+            <div class="model-name">
+
+                Llama 3.2 • Ollama
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =========================================
+         CHAT SECTION
+    ========================================== -->
+
+    <main class="chat-section">
+
+
+        <header class="topbar">
+
+            <div class="top-title">
+
+                <h1>
+                    Intelligent Cognitive Assistant
+                </h1>
+
+                <p>
+                    Understand • Decide • Act • Respond
+                </p>
+
+            </div>
+
+
+            <div class="engine">
+
+                ● Cognitive Engine Active
+
+            </div>
+
+        </header>
+
+
+        <!-- CHAT -->
+
+        <div
+            id="chatBox"
+            class="chat-box">
+
+
+            <!-- WELCOME -->
+
+            <div
+                id="welcome"
+                class="welcome">
+
+
+                <div class="welcome-icon">
+
+                    🧠
+
+                </div>
+
+
+                <h1>
+
+                    How can I help you?
+
+                </h1>
+
+
+                <p>
+
+                    I'm an intelligent cognitive assistant
+                    powered by a local Llama 3.2 model.
+                    I can understand your request, identify
+                    your intent and select the right tool
+                    to complete the task.
+
+                </p>
+
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div
+                id="quickActions"
+                class="quick-actions">
+
+
+                <div
+                    class="quick-card"
+                    onclick="quickMessage('What is the weather in Coimbatore?')">
+
+                    <div class="icon">
+                        🌤️
+                    </div>
+
+                    <h3>
+                        Check Weather
+                    </h3>
+
+                    <p>
+                        Get current weather information
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="quick-card"
+                    onclick="quickMessage('Calculate 125 * 48')">
+
+                    <div class="icon">
+                        🧮
+                    </div>
+
+                    <h3>
+                        Smart Calculator
+                    </h3>
+
+                    <p>
+                        Let the AI calculate for you
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="quick-card"
+                    onclick="quickMessage('Explain artificial intelligence simply')">
+
+                    <div class="icon">
+                        💡
+                    </div>
+
+                    <h3>
+                        Ask Anything
+                    </h3>
+
+                    <p>
+                        Ask a general knowledge question
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- INPUT -->
+
+        <div class="input-area">
+
+
+            <div class="input-container">
+
+
+                <textarea
+                    id="messageInput"
+                    placeholder="Message your cognitive assistant..."
+                    rows="1"></textarea>
+
+
+                <button
+                    id="sendButton"
+                    onclick="sendMessage()">
+
+                    ➤
+
+                </button>
+
+
+            </div>
+
+
+            <div class="input-info">
+
+                <span>
+                    Llama 3.2 • Local Processing
+                </span>
+
+                <span>
+                    Press Enter to send
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+<script>
+
+
+    const chatBox =
+        document.getElementById("chatBox");
+
+    const messageInput =
+        document.getElementById("messageInput");
+
+    const sendButton =
+        document.getElementById("sendButton");
+
+    const welcome =
+        document.getElementById("welcome");
+
+    const quickActions =
+        document.getElementById("quickActions");
+
+
+    // =========================================
+    // ADD MESSAGE
+    // =========================================
+
+    function addMessage(
+        message,
+        type,
+        intent = null
+    ) {
+
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.className =
+            "message-wrapper " + type;
+
+
+        const avatar =
+            document.createElement("div");
+
+
+        avatar.className =
+            "avatar " +
+            (type === "user"
+                ? "user-avatar"
+                : "ai-avatar");
+
+
+        avatar.textContent =
+            type === "user"
+                ? "👤"
+                : "🧠";
+
+
+        const bubble =
+            document.createElement("div");
+
+
+        bubble.className =
+            "bubble " +
+            (type === "user"
+                ? "user-bubble"
+                : "ai-bubble");
+
+
+        bubble.textContent =
+            message;
+
+
+        if (intent && type === "assistant") {
+
+            const badge =
+                document.createElement("div");
+
+            badge.className =
+                "intent";
+
+            badge.textContent =
+                "INTENT • " + intent;
+
+            bubble.appendChild(badge);
+
+        }
+
+
+        if (type === "user") {
+
+            wrapper.appendChild(bubble);
+
+            wrapper.appendChild(avatar);
+
+        }
+
+        else {
+
+            wrapper.appendChild(avatar);
+
+            wrapper.appendChild(bubble);
+
+        }
+
+
+        chatBox.appendChild(wrapper);
+
+
+        chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+    }
+
+
+    // =========================================
+    // TYPING INDICATOR
+    // =========================================
+
+    function showTyping() {
+
+
+        const wrapper =
+            document.createElement("div");
+
+
+        wrapper.id =
+            "typingIndicator";
+
+
+        wrapper.className =
+            "message-wrapper assistant";
+
+
+        wrapper.innerHTML = `
+
+            <div class="avatar ai-avatar">
+                🧠
+            </div>
+
+            <div class="bubble ai-bubble">
+
+                <div class="typing">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        chatBox.appendChild(wrapper);
+
+
+        chatBox.scrollTop =
+            chatBox.scrollHeight;
+
+    }
+
+
+    // =========================================
+    // SEND MESSAGE
+    // =========================================
+
+    async function sendMessage() {
+
+
+        const message =
+            messageInput.value.trim();
+
+
+        if (!message) {
+
+            return;
+
+        }
+
+
+        // Hide welcome
+
+        if (welcome) {
+
+            welcome.style.display =
+                "none";
+
+        }
+
+
+        if (quickActions) {
+
+            quickActions.style.display =
+                "none";
+
+        }
+
+
+        // User message
+
+        addMessage(
+            message,
+            "user"
+        );
+
+
+        messageInput.value = "";
+
+
+        sendButton.disabled =
+            true;
+
+
+        showTyping();
+
+
+        try {
+
+
+            const response =
+               await fetch(
+                 "http://127.0.0.1:8000/chat",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                message:
+                                    message
+
+                            })
+
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Server error"
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            const typing =
+                document.getElementById(
+                    "typingIndicator"
+                );
+
+
+            if (typing) {
+
+                typing.remove();
+
+            }
+
+
+            addMessage(
+                data.response,
+                "assistant",
+                data.intent
+            );
+
+
+        }
+
+
+        catch (error) {
+
+
+            console.error(error);
+
+
+            const typing =
+                document.getElementById(
+                    "typingIndicator"
+                );
+
+
+            if (typing) {
+
+                typing.remove();
+
+            }
+
+
+            addMessage(
+                "Sorry, I couldn't connect to the cognitive engine. Please make sure the FastAPI server and Ollama are running.",
+                "assistant"
+            );
+
+        }
+
+
+        sendButton.disabled =
+            false;
+
+
+        messageInput.focus();
+
+    }
+
+
+    // =========================================
+    // QUICK MESSAGE
+    // =========================================
+
+    function quickMessage(message) {
+
+        messageInput.value =
+            message;
+
+        sendMessage();
+
+    }
+
+
+    // =========================================
+    // CLEAR CHAT
+    // =========================================
+
+    function clearChat() {
+
+
+        chatBox.innerHTML = "";
+
+
+        const welcomeHTML = `
+
+            <div
+                id="welcome"
+                class="welcome">
+
+                <div class="welcome-icon">
+                    🧠
+                </div>
+
+                <h1>
+                    How can I help you?
+                </h1>
+
+                <p>
+                    I'm an intelligent cognitive assistant
+                    powered by a local Llama 3.2 model.
+                    I can understand your request, identify
+                    your intent and select the right tool
+                    to complete the task.
+                </p>
+
+            </div>
+
+
+            <div
+                id="quickActions"
+                class="quick-actions">
+
+                <div
+                    class="quick-card"
+                    onclick="quickMessage('What is the weather in Coimbatore?')">
+
+                    <div class="icon">🌤️</div>
+
+                    <h3>Check Weather</h3>
+
+                    <p>
+                        Get current weather information
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="quick-card"
+                    onclick="quickMessage('Calculate 125 * 48')">
+
+                    <div class="icon">🧮</div>
+
+                    <h3>Smart Calculator</h3>
+
+                    <p>
+                        Let the AI calculate for you
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="quick-card"
+                    onclick="quickMessage('Explain artificial intelligence simply')">
+
+                    <div class="icon">💡</div>
+
+                    <h3>Ask Anything</h3>
+
+                    <p>
+                        Ask a general knowledge question
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        chatBox.innerHTML =
+            welcomeHTML;
+
+    }
+
+
+    // =========================================
+    // ENTER KEY
+    // =========================================
+
+    messageInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+                &&
+                !event.shiftKey
+            ) {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
